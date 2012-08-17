@@ -13,7 +13,7 @@ var config = JSON.parse(fs.readFileSync(configFile));
 var bouncy = require('bouncy');
 bouncy(function (req, bounce) {
     var host = (req.headers.host || '').replace(/:\d+$/, '');
-    var route = config[host] || config[''];
+    var route = config[host] || '*'+host.substr(host.indexOf('.')) || config[''];
     
     if (Array.isArray(route)) {
         // jump to a random route on arrays
